@@ -2,10 +2,11 @@ import { useState } from "react";
 import Form from "./components/Form";
 import commentsData from "./data.json";
 import GroupComment from "./components/GroupComment";
+import Alert from "./components/Alert"; 
 import "./App.css";
 function App() {
   const [comments, setComments] = useState(commentsData["comments"]);
-
+  
   // add comments script start
   function updateCommentsHandler(newComments) {
     if (newComments.content) {

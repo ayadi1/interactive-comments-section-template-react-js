@@ -155,8 +155,44 @@ body {
   font-weight: 700;
 }
 /* form style end */
+/* alert style start */
+.alert {
+  background-color: var(--White);
+  border-radius: 5px;
+  padding: 20px;
+  width: 300px;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.alert--title {
+  color: var(--Dark-blue);
+}
+.alert--msg {
+  color: var(--Grayish-Blue);
+}
+.alert--button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.alert--button__NO,
+.alert--button__YES {
+  color: var(--White);
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.alert--button__NO {
+  background-color: var(--Grayish-Blue);
+}
+.alert--button__YES {
+  background-color: var(--Soft-Red);
+}
+/* alert style end */
 /* footer style */
-footer{
-    text-align: center;
-    margin-top: 50px;
+footer {
+  text-align: center;
+  margin-top: 50px;
 }
