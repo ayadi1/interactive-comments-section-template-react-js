@@ -39,10 +39,7 @@ function App() {
   }
   // delete comments script end
 
-  // update score script start
-  const addToScore = (id) => {};
-  const subToScore = (id) => {};
-  // update score script end
+
 
   // render ui components script start
   const comments_in_screen = comments.map((item) => {
@@ -59,8 +56,6 @@ function App() {
         replies={item.replies}
         handelDeleteComment={handelDeleteComment}
         isReplyingTo={item.replyingTo}
-        subToScore={subToScore}
-        addToScore={addToScore}
       />
     );
   });

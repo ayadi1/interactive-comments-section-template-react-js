@@ -1,21 +1,24 @@
-// import imgReply from "/assets/images/icon-reply.svg";
-// import imgDelete from "/assets/images/icon-delete.svg";
+import { useState } from "react";
 export default function Comment(props) {
   const style = props.isReplies ? { width: "80%", marginLeft: "auto" } : {};
+  const [score, setScore] = useState(props.score);
+  // update score script start
+  const addToScore = () => {
+    setScore((old) => ++old);
+    console.log(score);
+  };
+  const subToScore = () => {
+    setScore((old) => --old);
+  };
+  // update score script end
   return (
     <div className="comment" style={style}>
       <div className="comment--count">
-        <p
-          className="comment--count__add"
-          onClick={() => props.addToScore(props.id)}
-        >
+        <p className="comment--count__add" onClick={addToScore}>
           +
         </p>
-        {props.score}
-        <p
-          className="comment--count__sub"
-          onClick={() => props.subToScore(props.id)}
-        >
+        {score}
+        <p className="comment--count__sub" onClick={subToScore}>
           -
         </p>
       </div>

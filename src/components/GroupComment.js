@@ -12,8 +12,6 @@ export default function GroupComment(props) {
         handelDeleteComment={props.handelDeleteComment}
         id={props.id}
         isReplyingTo={props.isReplyingTo}
-        subToScore={props.subToScore}
-        addToScore={props.addToScore}
       />
       {props.replies.length > 0 &&
         props.replies.map((item) => {
@@ -31,8 +29,6 @@ export default function GroupComment(props) {
               isReplyingTo={item.replyingTo}
               handelDeleteComment={props.handelDeleteComment}
               id={item.id}
-              subToScore={props.subToScore}
-              addToScore={props.addToScore}
             />
           );
         })}
