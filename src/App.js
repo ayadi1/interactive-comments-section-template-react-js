@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Form from "./components/Form";
-import commentsData from "./data.json";
+// import commentsData from "./data.json";
 import GroupComment from "./components/GroupComment";
-import Alert from "./components/Alert"; 
+// import Alert from "./components/Alert";
 import "./App.css";
 function App() {
-  const [comments, setComments] = useState(commentsData["comments"]);
-  
+  const [comments, setComments] = useState([]);
+  // get data from server start
+  useEffect(() => {
+    const getData = async () => {
+      await axios("http://localhost:5000/api/v1/").then((response) => {
+        setComments(response.data.data);
+      });
+    };
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // get data from server end
+
   // add comments script start
-  function updateCommentsHandler(newComments) {
+  function updateCommentsHandler(newComments, isReplyTo = null) {
     if (newComments.content) {
       setComments((old) => {
         return [...old, newComments];
@@ -23,8 +35,8 @@ function App() {
     if (isReplyingTo) {
       comments.forEach((element) => {
         if (element.user.username === isReplyingTo) {
-          const newReply = element.replies.filter((item) => item.id !== id);
-          element.replies = newReply;
+          const newReply = element.replays.filter((item) => item.id !== id);
+          element.replays = newReply;
           console.log(newReply);
         }
         newComment.push(element);
@@ -40,8 +52,6 @@ function App() {
   }
   // delete comments script end
 
-
-
   // render ui components script start
   const comments_in_screen = comments.map((item) => {
     return (
@@ -52,11 +62,12 @@ function App() {
         content={item.content}
         score={item.score}
         isYou={item.isYou}
-        key={item.id}
+        key={item._id}
         id={item.id}
-        replies={item.replies}
+        replays={item.replays}
         handelDeleteComment={handelDeleteComment}
-        isReplyingTo={item.replyingTo}
+        isReplayFor={item.isReplayFor}
+        updateCommentsHandler={updateCommentsHandler}
       />
     );
   });

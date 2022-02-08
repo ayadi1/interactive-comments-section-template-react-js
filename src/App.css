@@ -67,7 +67,7 @@ body {
 }
 .comment--user--info {
   display: flex;
-  width: 71%;
+  width: 75%;
   gap: 10px;
   align-items: center;
 }
@@ -191,8 +191,22 @@ body {
   background-color: var(--Soft-Red);
 }
 /* alert style end */
-/* footer style */
+/* footer style start */
 footer {
   text-align: center;
   margin-top: 50px;
 }
+/* footer style end */
+/* media screen style start */
+@media screen and (max-width: 555px) {
+  .form,
+  .comment {
+    width: 90% !important;
+    margin-left: 0 !important ;
+    padding: 10px !important;
+  }
+  .comment--count {
+    width: 30px !important;
+  }
+}
+/* media screen style end */
