@@ -58,7 +58,6 @@ function App() {
     await axios(url).then((response) => {
       setComments(response.data.data);
     });
-
   }
   // delete comments script end
 

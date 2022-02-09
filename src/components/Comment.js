@@ -14,11 +14,7 @@ export default function Comment(props) {
     width: "80%",
     marginLeft: "auto",
   });
-  const [alertHandler, setAlertHandler] = useState({
-    display: "none",
-    id: null,
-    response: false,
-  });
+  const [alertHandler, setAlertHandler] = useState("none");
 
   // update form display start
   const displayCommentForm = () => {
@@ -84,35 +80,20 @@ export default function Comment(props) {
   // date handler script end
   // handel Delete Comment start
   const handelDeleteComment = () => {
-    setAlertHandler((old) => {
-      return {
-        ...old,
-        display: "flex",
-      };
-    });
+    setAlertHandler("flex");
   };
   const handleDeleteFalse = async () => {
-    setAlertHandler((old) => {
-      return {
-        ...old,
-        display: "none",
-      };
-    });
+    setAlertHandler("none");
   };
   const handleDeleteTrue = async (id) => {
     props.handelDeleteComment(props.id);
-    setAlertHandler((old) => {
-      return {
-        ...old,
-        display: "none",
-      };
-    });
+    setAlertHandler("none");
   };
   // handel Delete Comment end
   return (
     <>
       <Alert
-        display={alertHandler.display}
+        display={alertHandler}
         handleDeleteFalse={handleDeleteFalse}
         handleDeleteTrue={handleDeleteTrue}
         id={props.id}
