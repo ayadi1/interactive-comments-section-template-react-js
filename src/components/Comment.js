@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Form from "./Form";
+import axios from "axios";
 export default function Comment(props) {
+  const url = "http://localhost:5000/api/v1/";
+
   const [score, setScore] = useState(props.score);
 
   const style = props.isReplies ? { width: "80%", marginLeft: "auto" } : {};
 
-  
   const [formVisibility, setFormVisibility] = useState({
     display: "none",
     width: "80%",
@@ -31,8 +33,44 @@ export default function Comment(props) {
   // update form display end
 
   // update score script start
-  const addToScore = () => setScore((old) => ++old);
-  const subToScore = () => setScore((old) => --old);
+  const addToScore = async () => {
+    const add = await axios
+      .patch(`${url}${props.id}`, { score: 1 })
+      .catch(function (error) {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+      });
+    setScore(add.data.data.score);
+  };
+  const subToScore = async () => {
+    const sub = await axios
+      .patch(`${url}${props.id}`, { score: -1 })
+      .catch(function (error) {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+      });
+    setScore(sub.data.data.score);
+  };
   // update score script end
   return (
     <>
@@ -77,9 +115,7 @@ export default function Comment(props) {
               {props.isYou && (
                 <div
                   className="comment--action__delete"
-                  onClick={() =>
-                    props.handelDeleteComment(props.id)
-                  }
+                  onClick={() => props.handelDeleteComment(props.id)}
                 >
                   <img
                     className="comment--action__delete__img"
