@@ -72,6 +72,10 @@ export default function Comment(props) {
     setScore(sub.data.data.score);
   };
   // update score script end
+  // date handler script start
+  const date = new Date(props.createdAt);
+  const createdAt = `${date.getUTCDay()}-${date.getUTCMonth()}-${date.getUTCFullYear()}`;
+  // date handler script end
   return (
     <>
       <div className="comment" style={style}>
@@ -94,9 +98,7 @@ export default function Comment(props) {
               />
               <p className="comment--user--info__name">{props.username}</p>
               {props.isYou && <p className="comment--user--info__badge">you</p>}
-              <p className="comment--user--info__createdAt">
-                {props.createdAt}
-              </p>
+              <p className="comment--user--info__createdAt">{createdAt}</p>
             </div>
             <div className="comment--action">
               <div className="comment--action__reply">
