@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Form from "./Form";
+import Alert from "./Alert";
 import axios from "axios";
 export default function Comment(props) {
   const url = "http://localhost:5000/api/v1/";
@@ -12,6 +13,11 @@ export default function Comment(props) {
     display: "none",
     width: "80%",
     marginLeft: "auto",
+  });
+  const [alertHandler, setAlertHandler] = useState({
+    display: "none",
+    id: null,
+    response: false,
   });
 
   // update form display start
@@ -76,8 +82,41 @@ export default function Comment(props) {
   const date = new Date(props.createdAt);
   const createdAt = `${date.getUTCDay()}-${date.getUTCMonth()}-${date.getUTCFullYear()}`;
   // date handler script end
+  // handel Delete Comment start
+  const handelDeleteComment = () => {
+    setAlertHandler((old) => {
+      return {
+        ...old,
+        display: "flex",
+      };
+    });
+  };
+  const handleDeleteFalse = async () => {
+    setAlertHandler((old) => {
+      return {
+        ...old,
+        display: "none",
+      };
+    });
+  };
+  const handleDeleteTrue = async (id) => {
+    props.handelDeleteComment(props.id);
+    setAlertHandler((old) => {
+      return {
+        ...old,
+        display: "none",
+      };
+    });
+  };
+  // handel Delete Comment end
   return (
     <>
+      <Alert
+        display={alertHandler.display}
+        handleDeleteFalse={handleDeleteFalse}
+        handleDeleteTrue={handleDeleteTrue}
+        id={props.id}
+      />
       <div className="comment" style={style}>
         <div className="comment--count">
           <p className="comment--count__add" onClick={addToScore}>
@@ -117,7 +156,8 @@ export default function Comment(props) {
               {props.isYou && (
                 <div
                   className="comment--action__delete"
-                  onClick={() => props.handelDeleteComment(props.id)}
+                  // onClick={() => props.handelDeleteComment(props.id)}
+                  onClick={handelDeleteComment}
                 >
                   <img
                     className="comment--action__delete__img"
