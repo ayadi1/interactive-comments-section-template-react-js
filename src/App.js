@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "./components/Form";
+import { Oval } from  'react-loader-spinner'
 // import commentsData from "./data.json";
 import GroupComment from "./components/GroupComment";
 // import Alert from "./components/Alert";
@@ -80,6 +81,9 @@ function App() {
 
   return (
     <div className="App">
+      {
+       comments.length<0? <Oval  /> :''
+      }
       {comments_in_screen}
       <Form updateCommentsHandler={updateCommentsHandler} />
     </div>
