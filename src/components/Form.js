@@ -1,7 +1,6 @@
 import { useState } from "react";
 export default function Form(props) {
   // update style start
-
   // update style end
   // handel form data start
   const [formData, setFormData] = useState("");
@@ -10,19 +9,11 @@ export default function Form(props) {
   }
   const commentData = () => {
     const newComment = {
-      id: new Date().getMilliseconds(),
-      user: {
-        image: {
-          png: "./assets/images/avatars/image-juliusomo.png",
-          webp: "./assets/images/avatars/image-juliusomo.webp",
-        },
-        username: "juliusomo",
-      },
+      img: "/assets/images/avatars/image-juliusomo.png",
+      username: "juliusomo",
       isYou: true,
-      createdAt: "2 days ago",
       score: 0,
       content: formData,
-      replies: [],
     };
     setFormData("");
     return newComment;
@@ -44,7 +35,11 @@ export default function Form(props) {
       <button
         className="form--button"
         onClick={() => {
-          props.updateCommentsHandler(commentData());
+          if (props.isReplyFor) {
+            props.updateCommentsHandler(commentData(), props.isReplyFor);
+          } else {
+            props.updateCommentsHandler(commentData());
+          }
           // eslint-disable-next-line no-lone-blocks
           {
             props.displayCommentForm && props.displayCommentForm();

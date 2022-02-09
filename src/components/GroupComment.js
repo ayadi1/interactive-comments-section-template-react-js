@@ -2,7 +2,6 @@ import Comment from "./Comment";
 import axios from "axios";
 import { useEffect, useState } from "react";
 export default function GroupComment(props) {
-
   const [replays, setReplays] = useState([]);
 
   useEffect(() => {
@@ -53,7 +52,7 @@ export default function GroupComment(props) {
               replays={item.data.data.replays}
               isReplyingTo={item.data.data.replyingTo}
               handelDeleteComment={props.handelDeleteComment}
-              id={item.data.data.id}
+              id={item.data.data._id}
               updateCommentsHandler={props.updateCommentsHandler}
             />
           );

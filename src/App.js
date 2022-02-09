@@ -6,49 +6,59 @@ import GroupComment from "./components/GroupComment";
 // import Alert from "./components/Alert";
 import "./App.css";
 function App() {
+  const url = "http://localhost:5000/api/v1/";
   const [comments, setComments] = useState([]);
-  // get data from server start
+
+  // get data from server by axios start
+  const getData = async () => {
+    await axios(url).then((response) => {
+      setComments(response.data.data);
+    });
+  };
+  // get data from server by axios start
+
+  // update UI  start
   useEffect(() => {
-    const getData = async () => {
-      await axios("http://localhost:5000/api/v1/").then((response) => {
-        setComments(response.data.data);
-      });
-    };
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // get data from server end
+  // update UI  end
 
   // add comments script start
-  function updateCommentsHandler(newComments, isReplyTo = null) {
+  async function updateCommentsHandler(newComments, isReplyTo = null) {
     if (newComments.content) {
-      setComments((old) => {
-        return [...old, newComments];
+      if (isReplyTo) {
+        newComments.isReplayFor = isReplyTo;
+      }
+      await axios.post(url, newComments);
+      await axios(url).then((response) => {
+        setComments(response.data.data);
       });
     }
   }
   // add comments script end
 
   // delete comments script start
-  function handelDeleteComment(id, isReplyingTo) {
-    let newComment = [];
-    if (isReplyingTo) {
-      comments.forEach((element) => {
-        if (element.user.username === isReplyingTo) {
-          const newReply = element.replays.filter((item) => item.id !== id);
-          element.replays = newReply;
-          console.log(newReply);
-        }
-        newComment.push(element);
-      });
-    } else {
-      comments.forEach((element) => {
-        if (element.id !== id) {
-          newComment.push(element);
-        }
-      });
-    }
-    setComments(newComment);
+  async function handelDeleteComment(id) {
+    console.log(id);
+    await axios.delete(`${url}${id}`).catch(function (error) {
+      if (error.response) {
+        // Request made and server responded
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
+      }
+    });
+    await axios(url).then((response) => {
+      setComments(response.data.data);
+    });
+
   }
   // delete comments script end
 
@@ -63,7 +73,7 @@ function App() {
         score={item.score}
         isYou={item.isYou}
         key={item._id}
-        id={item.id}
+        id={item._id}
         replays={item.replays}
         handelDeleteComment={handelDeleteComment}
         isReplayFor={item.isReplayFor}

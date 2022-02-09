@@ -2,7 +2,10 @@ import { useState } from "react";
 import Form from "./Form";
 export default function Comment(props) {
   const [score, setScore] = useState(props.score);
+
   const style = props.isReplies ? { width: "80%", marginLeft: "auto" } : {};
+
+  
   const [formVisibility, setFormVisibility] = useState({
     display: "none",
     width: "80%",
@@ -75,7 +78,7 @@ export default function Comment(props) {
                 <div
                   className="comment--action__delete"
                   onClick={() =>
-                    props.handelDeleteComment(props.id, props.isReplyingTo)
+                    props.handelDeleteComment(props.id)
                   }
                 >
                   <img
