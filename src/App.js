@@ -31,16 +31,13 @@ function App() {
         newComments.isReplayFor = isReplyTo;
       }
       await axios.post(url, newComments);
-      await axios(url).then((response) => {
-        setComments(response.data.data);
-      });
+      getData();
     }
   }
   // add comments script end
 
   // delete comments script start
   async function handelDeleteComment(id) {
-    console.log(id);
     await axios.delete(`${url}${id}`).catch(function (error) {
       if (error.response) {
         // Request made and server responded
@@ -55,9 +52,7 @@ function App() {
         console.log("Error", error.message);
       }
     });
-    await axios(url).then((response) => {
-      setComments(response.data.data);
-    });
+    getData();
   }
   // delete comments script end
 
@@ -65,6 +60,7 @@ function App() {
   const comments_in_screen = comments.map((item) => {
     return (
       <GroupComment
+        commentsLength={comments.length}
         createdAt={item.createdAt}
         username={item.user.username}
         image={item.user.image.png}

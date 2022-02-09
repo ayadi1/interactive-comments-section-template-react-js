@@ -5,12 +5,25 @@ export default function GroupComment(props) {
   const [replays, setReplays] = useState([]);
 
   useEffect(() => {
-
+    setReplays([]);
     const getData = async () => {
       props.replays.forEach(async (itemID) => {
-        const comment = await axios.get(
-          `http://localhost:5000/api/v1/${itemID}`
-        );
+        const comment = await axios
+          .get(`http://localhost:5000/api/v1/${itemID}`)
+          .catch((error) => {
+            if (error.response) {
+              // Request made and server responded
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            } else if (error.request) {
+              // The request was made but no response was received
+              console.log(error.request);
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log("Error", error.message);
+            }
+          });
         setReplays((oldComment) => {
           return [...oldComment, comment];
         });
@@ -18,11 +31,10 @@ export default function GroupComment(props) {
     };
 
     getData();
-    
-  }, []);
+  }, [props.replays]);
   return (
     <>
-      {props.isReplayFor.length <=0 && (
+      {props.isReplayFor.length <= 0 && (
         <Comment
           createdAt={props.createdAt}
           username={props.username}
