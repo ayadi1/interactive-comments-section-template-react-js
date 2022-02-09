@@ -24,7 +24,7 @@ body {
 }
 /* App style start */
 .App {
-  width: 50%;
+  width: 70%;
   min-width: 500px;
   margin: auto;
 }
@@ -198,6 +198,11 @@ footer {
 }
 /* footer style end */
 /* media screen style start */
+@media screen and (max-width: 950px) {
+  .App {
+    width: 85%;
+  }
+}
 @media screen and (max-width: 555px) {
   .form,
   .comment {
