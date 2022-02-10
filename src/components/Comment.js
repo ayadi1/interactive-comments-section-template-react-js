@@ -3,7 +3,7 @@ import Form from "./Form";
 import Alert from "./Alert";
 import axios from "axios";
 export default function Comment(props) {
-  const url = "http://localhost:5000/api/v1/";
+  const url = "[api-url-here]";
 
   const [score, setScore] = useState(props.score);
 

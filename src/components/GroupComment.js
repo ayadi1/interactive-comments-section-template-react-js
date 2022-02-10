@@ -9,7 +9,7 @@ export default function GroupComment(props) {
     const getData = async () => {
       props.replays.forEach(async (itemID) => {
         const comment = await axios
-          .get(`http://localhost:5000/api/v1/${itemID}`)
+          .get(`[api-url-here]/${itemID}`)
           .catch((error) => {
             if (error.response) {
               // Request made and server responded

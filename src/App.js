@@ -7,7 +7,7 @@ import GroupComment from "./components/GroupComment";
 // import Alert from "./components/Alert";
 import "./App.css";
 function App() {
-  const url = "http://localhost:5000/api/v1/";
+  const url = "[api-url-here]";
   const [comments, setComments] = useState([]);
   console.log(comments);
   // get data from server by axios start
