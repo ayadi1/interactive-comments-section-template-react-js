@@ -1,3 +1,9 @@
+# interactive-comments-sections app
+![Design preview for the Interactive comments section coding challenge](./design/desktop-preview.jpg)
+### live preview : https://interactive-comments-sections.netlify.app/
+- if you wont back-end api for comment you can use my api from here : https://github.com/ayadi1/comments-api-express-JS-mongoDB
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
