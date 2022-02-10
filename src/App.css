@@ -148,19 +148,20 @@ body {
 /* form style end */
 /* alert style start */
 .alert {
-	background-color: var(--White);
-	border-radius: 5px;
-	padding: 20px;
-	width: 300px;
-	min-width: 250px;
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
+  background-color: var(--White);
+  border-radius: 5px;
+  padding: 20px;
+  width: 300px;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-	box-shadow: 0 5px 10px rgba(154,160,185,0.05), 0 15px 40px rgba(166,173,201,0.2);
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+    0 15px 40px rgba(166, 173, 201, 0.2);
 }
 .alert--title {
   color: var(--Dark-blue);
@@ -193,6 +194,13 @@ footer {
   margin-top: 50px;
 }
 /* footer style end */
+/* Spinner style start */
+.Spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Spinner style end */
 /* media screen style start */
 @media screen and (max-width: 950px) {
   .App {

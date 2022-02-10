@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "./components/Form";
-import { Oval } from  'react-loader-spinner'
+import Spinner from "./components/Spinner";
 // import commentsData from "./data.json";
 import GroupComment from "./components/GroupComment";
 // import Alert from "./components/Alert";
@@ -9,7 +9,7 @@ import "./App.css";
 function App() {
   const url = "http://localhost:5000/api/v1/";
   const [comments, setComments] = useState([]);
-
+  console.log(comments);
   // get data from server by axios start
   const getData = async () => {
     await axios(url).then((response) => {
@@ -81,9 +81,7 @@ function App() {
 
   return (
     <div className="App">
-      {
-       comments.length<0? <Oval  /> :''
-      }
+      {comments.length <= 0 ? <Spinner />  : ""}
       {comments_in_screen}
       <Form updateCommentsHandler={updateCommentsHandler} />
     </div>
